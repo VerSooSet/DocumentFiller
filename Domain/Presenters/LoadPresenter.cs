@@ -34,10 +34,10 @@ namespace Domain.Presenters
 			   throw new ArgumentException(nameof(filePath));
 			
 			OperationResult status = OperationResult.SourceProblem;
-
+			
 			try 
 			{ 
-			    status = _fService.LoadTemplateAsync(filePath).Result;
+				status = Task.Run(async () => await _fService.LoadTemplateAsync(filePath)).Result;
 			}
 			catch (Exception ex) 
 			{ 
